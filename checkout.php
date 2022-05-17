@@ -86,7 +86,7 @@ if (!isset($_SESSION['pelanggan'])) {
 
             </table>
 
-            <form action="POST">
+            <form method="POST">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -117,6 +117,41 @@ if (!isset($_SESSION['pelanggan'])) {
                 </div>
                 <button class="btn btn-primary" name="checkout">Checkout</button>
             </form>
+
+            <?php
+            if (isset($_POST['checkout'])) {
+                $id_pelanggan = $_SESSION['pelanggan']['id_pelanggan'];
+                $id_ongkir = $_POST['id_ongkir'];
+                $tanggal_pembelian = date("Y-m-d");
+
+                $ambil = $koneksi->query("SELECT * FROM ongkir WHERE id_ongkir='$id_ongkir'");
+                $arrayongkir = $ambil->fetch_assoc();
+                $tarif = $arrayongkir['tarif'];
+
+                $total_pembelian = $totalbelanja + $tarif;
+
+                // 1. Melakukan penyimpanan ke tabel pembelian
+                $koneksi->query("INSERT INTO 
+                pembelian (id_pelanggan, id_ongkir, tanggal_pembelian, total_pembelian) 
+                VALUES ('$id_pelanggan','$id_ongkir','$tanggal_pembelian','$total_pembelian') ");
+
+                // 2. Melakukan penyimpanan ke tabel pembelian_produk
+                $id_pembelian_barusan = $koneksi->insert_id;
+
+                foreach ($_SESSION['keranjang'] as $id_produk => $jumlah) {
+                    $koneksi->query("INSERT INTO pembelian_produk (id_pembelian, id_produk, jumlah) VALUES ('$id_pembelian_barusan','$id_produk','$jumlah') ");
+                }
+
+                // mangkosongkan keranjang
+                unset($_SESSION['keranjang']);
+
+                // menampilkan Pesan dengan Javascript
+                echo "<script>alert('Pembelian sukses')</script>";
+                // mengarahkan ke halaman index.php secara otomatis dengan Javascript
+                echo "<script>location ='nota.php?id=$id_pembelian_barusan' </script>";
+            }
+
+            ?>
         </div>
     </section>
 </body>
