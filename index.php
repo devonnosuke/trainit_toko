@@ -42,7 +42,7 @@ $koneksi = new mysqli("localhost", "root", "", "trainittoko");
                             <div class="caption">
                                 <h3><?php echo $perproduk['nama_produk'] ?></h3>
                                 <h5><?php echo number_format($perproduk['harga_produk']) ?></h5>
-                                <a href="" class="btn btn-primary">Beli</a>
+                                <a href="beli.php?id=<?php echo $perproduk['id_produk'] ?>" class="btn btn-primary">Beli</a>
                             </div>
                         </div>
                     </div>
