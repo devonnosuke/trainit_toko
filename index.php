@@ -11,6 +11,7 @@ $koneksi = new mysqli("localhost", "root", "", "trainittoko");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toko Trainit</title>
+
     <link rel="stylesheet" href="admin/assets/css/bootstrap.css">
 </head>
 
@@ -21,7 +22,13 @@ $koneksi = new mysqli("localhost", "root", "", "trainittoko");
             <ul class="nav navbar-nav">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="keranjang.php">Keranjang</a></li>
-                <li><a href="login.php">Login</a></li>
+                <?php if (isset($_SESSION['pelanggan'])) : ?>
+                    <!-- Jika telah login tampilkan menu di bawah -->
+                    <li><a href="logout.php">Logout</a></li>
+                <?php else : ?>
+                    <!-- Jika belum login tampilkan menu di bawah -->
+                    <li><a href="login.php">Login</a></li>
+                <?php endif; ?>
                 <li><a href="checkout.php">Checkout</a></li>
             </ul>
         </div>
