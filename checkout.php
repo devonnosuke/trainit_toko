@@ -115,6 +115,10 @@ if (!isset($_SESSION['pelanggan'])) {
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label>Alamat Lengkap Pengiriman</label>
+                    <textarea name="alamat_pengiriman" class="form-control" placeholder="masukan alamat lengkap pengiriman (termasuk kode pos)"></textarea>
+                </div>
                 <button class="btn btn-primary" name="checkout">Checkout</button>
             </form>
 
@@ -126,20 +130,38 @@ if (!isset($_SESSION['pelanggan'])) {
 
                 $ambil = $koneksi->query("SELECT * FROM ongkir WHERE id_ongkir='$id_ongkir'");
                 $arrayongkir = $ambil->fetch_assoc();
+                $nama_kota = $arrayongkir['nama_kota'];
                 $tarif = $arrayongkir['tarif'];
 
                 $total_pembelian = $totalbelanja + $tarif;
+                $alamat_pengiriman = $_POST['alamat_pengiriman'];
 
                 // 1. Melakukan penyimpanan ke tabel pembelian
                 $koneksi->query("INSERT INTO 
-                pembelian (id_pelanggan, id_ongkir, tanggal_pembelian, total_pembelian) 
-                VALUES ('$id_pelanggan','$id_ongkir','$tanggal_pembelian','$total_pembelian') ");
+                pembelian (id_pelanggan, id_ongkir, tanggal_pembelian, total_pembelian, nama_kota, tarif, alamat_pengiriman) 
+                VALUES ('$id_pelanggan','$id_ongkir','$tanggal_pembelian','$total_pembelian','$nama_kota','$tarif','$alamat_pengiriman') ");
 
                 // 2. Melakukan penyimpanan ke tabel pembelian_produk
                 $id_pembelian_barusan = $koneksi->insert_id;
 
                 foreach ($_SESSION['keranjang'] as $id_produk => $jumlah) {
-                    $koneksi->query("INSERT INTO pembelian_produk (id_pembelian, id_produk, jumlah) VALUES ('$id_pembelian_barusan','$id_produk','$jumlah') ");
+
+                    // Mendapatkan data produk berdasarkan id_produk
+                    $ambil = $koneksi->query("SELECT * FROM produk WHERE id_produk='$id_produk'");
+                    $perproduk = $ambil->fetch_assoc();
+
+                    $nama = $perproduk['nama_produk'];
+                    $harga = $perproduk['harga_produk'];
+                    $berat = $perproduk['berat_produk'];
+
+                    $subberat = $perproduk['berat_produk'] * $jumlah;
+                    $subharga = $perproduk['harga_produk'] * $jumlah;
+
+                    $koneksi->query("INSERT INTO pembelian_produk (id_pembelian, id_produk, nama, harga, berat, subberat, subharga, jumlah) 
+                    VALUES('$id_pembelian_barusan','$id_produk','$nama','$harga','$berat','$subberat','$subharga','$jumlah')");
+
+
+                    // $koneksi->query("INSERT INTO pembelian_produk (id_pembelian, id_produk, jumlah) VALUES ('$id_pembelian_barusan','$id_produk','$jumlah') ");
                 }
 
                 // mangkosongkan keranjang
