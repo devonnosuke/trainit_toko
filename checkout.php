@@ -155,8 +155,8 @@ if (empty($_SESSION['keranjang']) or !isset($_SESSION['keranjang'])) {
                     $koneksi->query("INSERT INTO pembelian_produk (id_pembelian, id_produk, nama, harga, berat, subberat, subharga, jumlah) 
                     VALUES('$id_pembelian_barusan','$id_produk','$nama','$harga','$berat','$subberat','$subharga','$jumlah')");
 
-
-                    // $koneksi->query("INSERT INTO pembelian_produk (id_pembelian, id_produk, jumlah) VALUES ('$id_pembelian_barusan','$id_produk','$jumlah') ");
+                    // update stok
+                    $koneksi->query("UPDATE produk SET stok_produk=stok_produk-$jumlah WHERE id_produk='$id_produk'");
                 }
 
                 // mangkosongkan keranjang

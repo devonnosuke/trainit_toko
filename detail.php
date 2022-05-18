@@ -37,11 +37,12 @@ $pecah = $ambil->fetch_assoc();
                 <div class="col-md-6">
                     <h2><?php echo $pecah['nama_produk'] ?></h2>
                     <h4>Rp.<?php echo $pecah['harga_produk'] ?></h4>
+                    <h4>Stok: <?php echo $pecah['stok_produk'] ?></h4>
 
                     <form method="POST">
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="number" min="1" class="form-control" name="jumlah">
+                                <input type="number" min="1" max="<?php echo $pecah['stok_produk'] ?>" class="form-control" name="jumlah">
                                 <div class="input-group-btn">
                                     <button class="btn btn-primary" name="beli">Beli</button>
                                 </div>
