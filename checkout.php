@@ -11,6 +11,15 @@ if (!isset($_SESSION['pelanggan'])) {
     echo "<script>location ='login.php' </script>";
 }
 
+// jika SESSION keranjang belum ada (belum belanja), maka dikembalikan ke index.php
+if (empty($_SESSION['keranjang']) or !isset($_SESSION['keranjang'])) {
+    // menampilkan dengan Javascript
+    echo "<script>alert('Keranjang kosong, silahkan belanja terlebih dahulu')</script>";
+    // mengarahkan ke halaman index.php secara otomatis dengan Javascript
+    echo "<script>location ='index.php' </script>";
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,23 +33,9 @@ if (!isset($_SESSION['pelanggan'])) {
 </head>
 
 <body>
-    <!-- navbar -->
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <ul class="nav navbar-nav">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="keranjang.php">Keranjang</a></li>
-                <!-- Jika telah login tampilkan menu di bawah -->
-                <?php if (!empty($_SESSION['pelanggan'])) : ?>
-                    <li><a href="logout.php">Logout</a></li>
-                    <!-- Jika belum login tampilkan menu di bawah -->
-                <?php else : ?>
-                    <li><a href="login.php">Login</a></li>
-                <?php endif; ?>
-                <li><a href="checkout.php">Checkout</a></li>
-            </ul>
-        </div>
-    </nav>
+
+    <?php include "menu.php" ?>
+
     <!-- Konten -->
     <section class="konten">
         <div class="container">

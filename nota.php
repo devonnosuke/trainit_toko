@@ -15,23 +15,8 @@ include "koneksi.php";
 
 <body>
 
-    <!-- navbar -->
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <ul class="nav navbar-nav">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="keranjang.php">Keranjang</a></li>
-                <!-- Jika telah login tampilkan menu di bawah -->
-                <?php if (!empty($_SESSION['pelanggan'])) : ?>
-                    <li><a href="logout.php">Logout</a></li>
-                    <!-- Jika belum login tampilkan menu di bawah -->
-                <?php else : ?>
-                    <li><a href="login.php">Login</a></li>
-                <?php endif; ?>
-                <li><a href="checkout.php">Checkout</a></li>
-            </ul>
-        </div>
-    </nav>
+    <?php include "menu.php" ?>
+
     <section class="konten">
         <div class="container">
             <!-- nota disisni copas saja dari nota yang ada di admin -->
