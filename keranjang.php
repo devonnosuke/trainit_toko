@@ -1,7 +1,7 @@
 <?php
 session_start();
 // koenksi ke database
-$koneksi = new mysqli("localhost", "root", "", "trainittoko");
+include "koneksi.php";
 
 // jika SESSION pelanggan belum ada (belum login), maka dikembalikan ke login.php
 if (!isset($_SESSION['pelanggan'])) {

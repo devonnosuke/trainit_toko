@@ -1,6 +1,6 @@
 <?php
 // koenksi ke database
-$koneksi = new mysqli("localhost", "root", "", "trainittoko");
+include "koneksi.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
