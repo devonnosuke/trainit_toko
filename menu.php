@@ -6,6 +6,7 @@
             <li><a href="keranjang.php">Keranjang</a></li>
             <?php if (isset($_SESSION['pelanggan'])) : ?>
                 <!-- Jika telah login tampilkan menu di bawah -->
+                <li><a href="riwayat.php">Riwayat Belanja</a></li>
                 <li><a href="logout.php">Logout</a></li>
             <?php else : ?>
                 <!-- Jika belum login tampilkan menu di bawah -->

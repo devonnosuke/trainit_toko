@@ -70,8 +70,13 @@ if (isset($_POST["login"])) {
 
         // menampilkan Pesan Gagal login dengan Javascript
         echo "<script>alert('yey, anda berhasil login')</script>";
-        // mengarahkan ke halaman login.php secara otomatis dengan Javascript
-        echo "<script>location ='checkout.php' </script>";
+
+        if (isset($_SESSION['keranjang'])) {
+            // mengarahkan ke halaman checkout.php secara otomatis dengan Javascript
+            echo "<script>location ='checkout.php' </script>";
+        } else {
+            echo "<script>location ='riwayat.php' </script>";
+        }
     } else {
         // jika akun tidak ada yang cocok di database
 

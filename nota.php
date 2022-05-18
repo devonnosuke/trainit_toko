@@ -26,6 +26,23 @@ include "koneksi.php";
             $detail = $ambil->fetch_assoc();
             ?>
 
+            <!-- jika pelanggan yang beli tidak sama dengan pelanggan yang login, maka dilarikan ke riwayat.php karena tidak berhak melihat nota orang lain -->
+            <?php
+            // mendapatkan id_pelanggan
+            $idpelangganyangbeli = $detail['id_pelanggan'];
+
+            // mendapatkan id pelanggan yang login
+            $idpelangganyanglogin = $_SESSION['pelanggan']['id_pelanggan'];
+
+            if ($idpelangganyangbeli !== $idpelangganyanglogin) {
+                // menampilkan Pesan dengan Javascript
+                echo "<script>alert('jangan nakal')</script>";
+                // mengarahkan ke halaman riwayat.php secara otomatis dengan Javascript
+                echo "<script>location ='riwayat.php' </script>";
+                exit();
+            }
+            ?>
+
             <div class="row">
                 <div class="col-md-4">
                     <h3>Pembelian</h3>
