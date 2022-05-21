@@ -15,5 +15,9 @@
             <li><a href="daftar.php">Daftar</a></li>
             <li><a href="checkout.php">Checkout</a></li>
         </ul>
+        <form method="GET" action="pencarian.php" class="navbar-form navbar-right">
+            <input type="text" class="form-control" name="keyword">
+            <button class="btn btn-primary">Cari</button>
+        </form>
     </div>
 </nav>
