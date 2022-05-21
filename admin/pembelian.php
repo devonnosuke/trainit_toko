@@ -6,6 +6,7 @@
             <th>no</th>
             <th>nama pelanggan</th>
             <th>tanggal</th>
+            <th>Status Pembelian</th>
             <th>total</th>
             <th>aksi</th>
         </tr>
@@ -18,9 +19,14 @@
                 <td><?php echo $nomor ?></td>
                 <td><?php echo $pecah['nama_pelanggan']; ?></td>
                 <td><?php echo $pecah['tanggal_pembelian']; ?></td>
-                <td><?php echo $pecah['total_pembelian']; ?></td>
+                <td><?php echo $pecah['status_pembelian']; ?></td>
+                <td>Rp.<?php echo number_format($pecah['total_pembelian']); ?></td>
                 <td>
                     <a href="index.php?halaman=detail&id=<?php echo $pecah['id_pembelian'] ?>" class="btn btn-info">detail</a>
+
+                    <?php if ($pecah['status_pembelian'] == 'sudah melakukan pembayaran') : ?>
+                        <a href="index.php?halaman=pembayaran&id=<?php echo $pecah['id_pembelian'] ?>" class="btn btn-success">Pembayaran</a>
+                    <?php endif; ?>
                 </td>
             </tr>
             <?php $nomor++ ?>

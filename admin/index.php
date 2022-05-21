@@ -90,6 +90,8 @@ font-size: 16px;"> Last access : <?= date('d M Y') ?> &nbsp; <a href="login.html
                         include 'pelanggan.php';
                     } elseif ($_GET['halaman'] == 'detail') {
                         include 'detail.php';
+                    } elseif ($_GET['halaman'] == 'pembayaran') {
+                        include 'pembayaran.php';
                     }
                     // Bagian Produk
                     elseif ($_GET['halaman'] == 'tambahproduk') {

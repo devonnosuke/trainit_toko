@@ -62,8 +62,8 @@ session_start();
                 <div class="col-md-4">
                     <h3>Pengiriman</h3>
                     <strong><?php echo $detail['nama_kota'] ?></strong><br>
-                    Ongkos Kirim: Rp.<?php echo number_format($detail['tarif']) ?><br>
-                    Alamat: <?php echo $detail['alamat_pengiriman'] ?>
+                    Ongkos Kirim: <b>Rp.<?php echo number_format($detail['tarif']) ?></b><br>
+                    Alamat: <b><?php echo $detail['alamat_pengiriman'] ?></b>
                 </div>
             </div>
 
@@ -80,7 +80,8 @@ session_start();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $nomor = 1; ?>
+                    <?php $nomor = 1;
+                    $totalbelanja = 0; ?>
                     <?php $ambil = $koneksi->query("SELECT * FROM pembelian_produk WHERE id_pembelian='$_GET[id]'") ?>
                     <?php while ($pecah = $ambil->fetch_assoc()) { ?>
                         <tr>
@@ -93,15 +94,37 @@ session_start();
                             <td>Rp.<?php echo number_format($pecah['subharga']); ?></td>
                         </tr>
                         <?php $nomor++ ?>
+                        <?php $totalbelanja += $pecah['subharga']; ?>
                     <?php } ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="6">Total Belanja (Ditambah Ongkir) : </th>
+                        <th>Rp.<?php echo number_format($totalbelanja) ?> + Rp.<?php echo number_format($detail['tarif']) ?> = Rp.<?php echo number_format($detail['total_pembelian']) ?></th>
+                    </tr>
+                </tfoot>
             </table>
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select name="id_ongkir" id="pilih" class="form-control" onchange="ubahRekening()">
+                            <option value="">Pilih Bank Terlebih Dahulu</option>
+                            <option value="137-647582-2834 AN.Arif Nur Rohman">BANK MANDIRI</option>
+                            <option value="124-312312-2837 AN.MUFASA">BANK BRI</option>
+                            <option value="123-231954-4756 AN.HAKUNA MATATA">BANK BNI</option>
+                            <option value="452-787856-1275 AN.GROOFY">BANK BSI</option>
+                            <option value="127-364612-3423 AN.ARNOLD">BANK BCA</option>
+                            <option value="456-907865-8898 AN.DOLOR SIT AMET">BANK BUKOPIN</option>
+                            <option value="986-556342-3423 AN.LOREM IPSUM">BANK OCBCNISP</option>
+                            <option value="453-124323-3422 AN.ARA">BANK MEGA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-8" id="kolom" style="display:none">
                     <div class="alert alert-info">
                         <p>
-                            Silahkan melakukan pembayaran Rp.<?php echo number_format($detail['total_pembelian']) ?> <br>
-                            <strong>BANK MANDIRI 137-001088-3276 AN.Arif Nur Rohman</strong>
+                            Silahkan melakukan pembayaran sebesar <b>Rp.<?php echo number_format($detail['total_pembelian']) ?></b> <br>
+                            Ke <strong id="tampil"></strong>
                         </p>
                     </div>
                 </div>
@@ -109,6 +132,17 @@ session_start();
 
         </div>
     </section>
+    <script>
+        const pilih = document.getElementById('pilih');
+        const tampil = document.getElementById('tampil');
+        const kolom = document.getElementById('kolom');
+
+        function ubahRekening() {
+            kolom.style = 'display:block';
+            tampil.textContent = pilih.value;
+        }
+        console.log(pilih);
+    </script>
 </body>
 
 </html>
