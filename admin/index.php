@@ -57,19 +57,22 @@ font-size: 16px;"> Last access : <?= date('d M Y') ?> &nbsp; <a href="login.html
                     </li>
 
                     <li>
-                        <a href="index.php"><i class="fa fa-dashboard fa-3x"></i> Home</a>
+                        <a href="index.php"><i class="fa fa-dashboard"></i> Home</a>
                     </li>
                     <li>
-                        <a href="index.php?halaman=produk"><i class="fa fa-dashboard fa-3x"></i> Produk</a>
+                        <a href="index.php?halaman=produk"><i class="fa fa-cube"></i> Produk</a>
                     </li>
                     <li>
-                        <a href="index.php?halaman=pembelian"><i class="fa fa-dashboard fa-3x"></i> Pembelian</a>
+                        <a href="index.php?halaman=pembelian"><i class="fa fa-shopping-cart"></i> Pembelian</a>
                     </li>
                     <li>
-                        <a href="index.php?halaman=pelanggan"><i class="fa fa-dashboard fa-3x"></i> Pelanggan</a>
+                        <a href="index.php?halaman=laporan_pembelian"><i class="fa fa-file"></i> Laporan</a>
                     </li>
                     <li>
-                        <a href="index.php?halaman=logout"><i class="fa fa-dashboard fa-3x"></i> Logout</a>
+                        <a href="index.php?halaman=pelanggan"><i class="fa fa-users"></i> Pelanggan</a>
+                    </li>
+                    <li>
+                        <a href="index.php?halaman=logout"><i class="fa fa-sign-out"></i> Logout</a>
                     </li>
 
                 </ul>
@@ -92,6 +95,8 @@ font-size: 16px;"> Last access : <?= date('d M Y') ?> &nbsp; <a href="login.html
                         include 'detail.php';
                     } elseif ($_GET['halaman'] == 'pembayaran') {
                         include 'pembayaran.php';
+                    } elseif ($_GET['halaman'] == 'laporan_pembelian') {
+                        include 'laporan_pembelian.php';
                     }
                     // Bagian Produk
                     elseif ($_GET['halaman'] == 'tambahproduk') {
