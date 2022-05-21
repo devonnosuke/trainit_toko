@@ -24,7 +24,7 @@
                 <td>
                     <a href="index.php?halaman=detail&id=<?php echo $pecah['id_pembelian'] ?>" class="btn btn-info">detail</a>
 
-                    <?php if ($pecah['status_pembelian'] == 'sudah melakukan pembayaran') : ?>
+                    <?php if ($pecah['status_pembelian'] !== 'pending') : ?>
                         <a href="index.php?halaman=pembayaran&id=<?php echo $pecah['id_pembelian'] ?>" class="btn btn-success">Pembayaran</a>
                     <?php endif; ?>
                 </td>
