@@ -61,7 +61,7 @@ if (isset($_POST['save'])) {
 
     foreach ($namanamafoto as $key => $tiap_nama) {
         $tiap_lokasi = $lokasi[$key];
-        move_uploaded_file($tiap_lokasi, "../foto_produk/'.$tiap_nama");
+        move_uploaded_file($tiap_lokasi, "../foto_produk/" . $tiap_nama);
 
         $koneksi->query("INSERT INTO produk_foto (id_produk,nama_foto_produk) VALUES('$id_terbaru','$tiap_nama')");
     }

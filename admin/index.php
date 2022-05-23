@@ -102,6 +102,10 @@ font-size: 16px;"> Last access : <?= date('d M Y') ?> &nbsp; <a href="login.html
                         include 'laporan_pembelian.php';
                     } elseif ($_GET['halaman'] == 'kategori') {
                         include 'kategori.php';
+                    } elseif ($_GET['halaman'] == 'detailproduk') {
+                        include 'detailproduk.php';
+                    } elseif ($_GET['halaman'] == 'hapusfotoproduk') {
+                        include 'hapusfotoproduk.php';
                     }
                     // Bagian Produk
                     elseif ($_GET['halaman'] == 'tambahproduk') {
