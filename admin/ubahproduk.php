@@ -4,6 +4,13 @@
 $ambil = $koneksi->query("SELECT * FROM produk WHERE id_produk='$_GET[id]' ");
 $pecah = $ambil->fetch_assoc();
 
+$dataKategori = [];
+
+$ambil = $koneksi->query("SELECT * FROM kategori");
+while ($tiap = $ambil->fetch_assoc()) {
+    $dataKategori[] = $tiap;
+}
+
 ?>
 
 <pre><?php print_r($pecah) ?></pre>
@@ -12,6 +19,17 @@ $pecah = $ambil->fetch_assoc();
     <div class="form-group">
         <label>nama</label>
         <input type="text" class="form-control" name="nama" value="<?php echo $pecah['nama_produk'] ?>">
+    </div>
+    <div class="form-group">
+        <label>kategori</label>
+        <select name="id_kategori" class="form-control">
+            <option value="">pilih kategori</option>
+            <?php foreach ($dataKategori as $key => $value) : ?>
+                <option value="<?php echo $value['id_kategori'] ?>" <?= ($pecah['id_kategori'] == $value['id_kategori']) ? 'selected' : '' ?>>
+                    <?php echo $value['nama_kategori'] ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
     </div>
     <div class="form-group">
         <label>Harga (Rp)</label>
@@ -44,6 +62,7 @@ if (isset($_POST['ubah'])) {
         $koneksi->query("UPDATE produk 
         SET
          nama_produk='$_POST[nama]',
+         id_kategori='$_POST[id_kategori]',
          harga_produk='$_POST[harga]',
          berat_produk='$_POST[berat]',
          foto_produk='$namafoto',
@@ -54,6 +73,7 @@ if (isset($_POST['ubah'])) {
         $koneksi->query("UPDATE produk 
         SET
          nama_produk='$_POST[nama]',
+         id_kategori='$_POST[id_kategori]',
          harga_produk='$_POST[harga]',
          berat_produk='$_POST[berat]',
          deskripsi_produk='$_POST[deskripsi]'

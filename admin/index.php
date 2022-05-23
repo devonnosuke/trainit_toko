@@ -51,13 +51,16 @@ font-size: 16px;"> Last access : <?= date('d M Y') ?> &nbsp; <a href="login.html
         <!-- /. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
+                <ul class="nav" id="main-menu" style="text-transform:uppercase">
                     <li class="text-center">
                         <img src="assets/img/find_user.png" class="user-image img-responsive" />
                     </li>
 
                     <li>
                         <a href="index.php"><i class="fa fa-dashboard"></i> Home</a>
+                    </li>
+                    <li>
+                        <a href="index.php?halaman=kategori"><i class="fa fa-list"></i> Kategori</a>
                     </li>
                     <li>
                         <a href="index.php?halaman=produk"><i class="fa fa-cube"></i> Produk</a>
@@ -82,7 +85,7 @@ font-size: 16px;"> Last access : <?= date('d M Y') ?> &nbsp; <a href="login.html
         </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper">
-            <div id="page-inner">
+            <div id="page-inner" style="padding: 15px 140px;">
                 <?php
                 if (isset($_GET['halaman'])) {
                     if ($_GET['halaman'] == 'produk') {
@@ -97,6 +100,8 @@ font-size: 16px;"> Last access : <?= date('d M Y') ?> &nbsp; <a href="login.html
                         include 'pembayaran.php';
                     } elseif ($_GET['halaman'] == 'laporan_pembelian') {
                         include 'laporan_pembelian.php';
+                    } elseif ($_GET['halaman'] == 'kategori') {
+                        include 'kategori.php';
                     }
                     // Bagian Produk
                     elseif ($_GET['halaman'] == 'tambahproduk') {

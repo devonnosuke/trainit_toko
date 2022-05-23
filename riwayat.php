@@ -59,7 +59,7 @@ if (empty($_SESSION['pelanggan']) or !isset($_SESSION['pelanggan'])) {
                                     Resi: <?php echo $pecah['resi_pengiriman']; ?>
                                 <?php endif; ?>
                             </td>
-                            <td><?php echo number_format($pecah['total_pembelian']) ?></td>
+                            <td>Rp.<?php echo number_format($pecah['total_pembelian']) ?></td>
                             <td>
                                 <a href="nota.php?id=<?php echo $pecah['id_pembelian'] ?>" class="btn btn-info">Nota</a>
                                 <?php if ($pecah['status_pembelian'] == 'pending') : ?>
